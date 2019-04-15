@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1555079493795.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "4568FC00",
+    "lastKnownWriteTime" : 1555097137,
+    "last_content_update" : 1555097137127,
+    "path" : "~/projects/ns-census/R/02_download-boundary-files.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "100,1",
+        "scrollLine" : "65"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
