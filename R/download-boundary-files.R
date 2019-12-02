@@ -1,92 +1,114 @@
+package_root <- function() {
 
-url <- "http://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/2016/lda_000b16a_e.zip"
+  res <- find.package("recensement")
 
-download.file(url, "data/raw/shp/disemmination-areas.zip")
+  if(!dir.exists(file.path(res, "cache"))) {
+    dir.create(file.path(res, "cache", "data", "2016"), recursive = TRUE)
+    dir.create(file.path(res, "cache", "shp"), recursive = TRUE)
+  }
 
-test_get <- 
-  httr::GET(
-    url = "https://www150.statcan.gc.ca/t1/wds/rest/getFullTableDownloadSDMX/14100287"
-  ) %>% 
-  
-  content()
+  res
 
-
-url <- test_get$object
+}
 
 
-download.file(url, "data/raw/test-sdmx.zip")
-
-library(rsdmx)
-
-x <- readSDMX("data/raw/test-sdmx/14100287_2.xml", isURL = FALSE)
 
 
-get_2016_census_profile <- function(topic = 8, dguid = "", browse = FALSE) {
-  
+download_2016_census_profile <- function(dguid = "", topic = 0, browse = FALSE) {
+
+  cat(paste0(dguid, "\n"))
+
   if(browse) browser()
-  
+
   root_url <- "https://www12.statcan.gc.ca/rest/census-recensement/CPR2016.json"
-  
-  
+
+
   req <- httr::GET(
-    url = root_url, 
-    query = list(
+    url = root_url
+    , query = list(
       topic = topic,
       dguid = dguid
     )
   )
-  
+
   raw <- httr::content(req, as = "text")
-  
+
   raw <- stringr::str_remove(raw, "^//")
-  
+
   raw <- jsonlite::fromJSON(raw)
-  
+
   res <- as.data.frame(raw$DATA)
-  
+
   names(res) <- tolower(raw$COLUMNS)
-  
+
   res <- tibble::as_tibble(res)
-  
+
   res
 
+}
+
+get_2016_census_profile <- function(dguid = "", topic = 8, browse = FALSE) {
+
+  dat_file_path <- file.path(package_root(), "cache", "data", "2016", dguid, paste0(topic, ".rds"))
+
+  dat_dir_path <- file.path(package_root(), "cache", "data", "2016", dguid)
+
+  if(!file.exists(dat_file_path)) {
+
+    if(!dir.exists(dat_dir_path)) {
+      dir.create(dat_dir_path, recursive = TRUE)
+    }
+
+    cat(paste0(dat_file_path, " does not exist; initiating download"))
+
+    res <- download_2016_census_profile(dguid = dguid, topic = topic, browse = browse)
+
+    saveRDS(res, dat_file_path)
+
+  } else {
+    res <- readRDS(dat_file_path)
+  }
+
+
+  res
 }
 
 
 get_2016_census_geographies <- function(geos = "CSD", cpt = "00", browse = FALSE) {
-  
+
+
   if(browse) browser()
-  
+
   root_url <- "https://www12.statcan.gc.ca/rest/census-recensement/CR2016Geo.json"
-  
-  
+
+
   req <- httr::GET(
-    url = root_url, 
+    url = root_url,
     query = list(
-      geos = geos, 
+      geos = geos,
       cpt = cpt
     )
   )
-  
-  
+
+
   raw <- httr::content(req, as = "text")
-  
+
   raw <- stringr::str_remove(raw, "^//")
-  
+
   raw <- jsonlite::fromJSON(raw)
-  
+
   res <- as.data.frame(raw$DATA, stringsAsFactors = FALSE)
-  
+
   names(res) <- tolower(raw$COLUMNS)
-  
+
   res <- tibble::as_tibble(res)
-  
+
   res
-  
+
 }
 
 
-census_geo_levels = list(
+census_geo_level_names = list(
   "CD"      = "Census divisions",
   "CMACA"   = "Census metropolitan areas and census agglomerations",
   "CSD"     = "Census subdivisions (municipalities)",
@@ -100,7 +122,7 @@ census_geo_levels = list(
   "PR"      = "Canada, provinces and territories"
 )
 
-census_geo_levels = list(
+census_geo_level_prefixes = list(
   "CD"      = "lcd_",
   "CMACA"   = "lcma",
   "CSD"     = "lcsd",
@@ -108,61 +130,60 @@ census_geo_levels = list(
   "DPL"     = "ldpl",
   "ER"      = "ler_",
   "FED"     = "lfed",
-  "FSA"     = "lsfa",
+  "FSA"     = "lfsa",
   "HR"      = "lhr_",
   "POPCNTR" = "lpc_",
   "PR"      = "lpr_",
   "DA"      = "lda_"
 )
 
+
 download_boundaries <- function(geos = "CSD", year = 2016) {
-  
+
   # For production
-  # package_root <- find.package("recensement")
-  
+  package_root <- find.package("recensement")
+
   tfile <- tempfile()
   tdir <- tempdir()
-  
-  file_prefix <- census_geo_levels[[geos]]
-  
+
+  file_prefix <- census_geo_level_prefixes[[geos]]
+
   geo_url <- paste0("http://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/2016/", file_prefix, "000b16a_e.zip")
   download.file(geo_url, tfile)
-  
+
   unzip(tfile, exdir = tdir)
-  
-  conf <- yaml::read_yaml("conf.yml")
-  
+
   shape_file <- list.files(tdir, pattern = "shp", full.names = TRUE)
-  
+
   shp <- sf::st_read(shape_file)
-  
+
   names(shp) <- tolower(names(shp))
-  
-  if(!dir.exists(file.path(conf$cache, "shp"))) dir.create(file.path(conf$cache, "shp"))
-  if(!dir.exists(file.path(conf$cache, "shp", year))) dir.create(file.path(conf$cache, "shp", year))
-  
+
+  cache_dir = file.path(package_root(), "cache", "shp", year)
+
+  if(!dir.exists(cache_dir)) dir.create(cache_dir, recursive = TRUE)
+
   unlink(tfile)
   unlink(tdir)
-  
-  saveRDS(shp, file.path(conf$cache, "shp", year, paste0(tolower(geos), ".rds")))
+
+  saveRDS(shp, file.path(package_root(), "cache", "shp", year, paste0(tolower(geos), ".rds")))
 }
 
-get_boundaries <- function(geos = "CSD", year = 2016) {
-  
-  conf <- yaml::read_yaml("conf.yml")
-  
-  geo_file_path <- file.path(conf$cache, "shp", year, paste0(tolower(geos), ".rds"))
-  
+get_boundaries <- function(geos = "CSD", year = 2016, browse = FALSE) {
+
+  if(browse) browser()
+
+  geo_file_path <- file.path(package_root(), "cache", "shp", year, paste0(tolower(geos), ".rds"))
+
   if(!file.exists(geo_file_path)) {
-    
-    cat(paste0(geo_file_path, " does not exist; initiating download"))
-    
+
+    cat(paste0(geo_file_path, " does not exist; initiating download\n"))
+
     download_boundaries(geos = geos, year = year)
-    
+
   }
-  
+
   res <- readRDS(geo_file_path)
-  
+
   res
 }
-

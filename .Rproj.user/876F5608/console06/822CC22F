@@ -1,49 +1,0 @@
-[0m[0K]0;:/c/Users/tmcmanus/Documents/projects/recensement[?25l
-[0;32mtmcmanus@V02 [0;35m [0;33m~/Documents/projects/recensement[0m[0K
-$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git i[0K[?25hn[0Ki[0Kt[0K[?25l
-[0K[?25hInitialized empty Git repository in C:/Users/tmcmanus/Documents/projects/recensement/.git/[0K[?25l
-[0K[?25h[?25l
-[0;32mtmcmanus@V02 [0;35m [0;33m~/Documents/projects/recensement[0;36m (master)[0m[0K
-$[0K[3G[?25h[4G[3G[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[?25l$ git ad[0K[?25h[?25l$ git a[0K[?25h[?25l$ git[0K[7G[?25h[?25l$ git r[0K[?25he[0Km[0Ko[0Kt[0Ke[0K[14G[?25l$ git remote a[0K[?25hd[0Kd[0K[18G[?25l$ git remote add o[0K[?25hr[0Ki[0Kg[0Ki[0Kn[0K[25G[?25l$ git remote add origin g[0K[?25h[?25l$ git remote add origin[0K[26G[?25h[25G[?25l$ git remote add origin h[0K[?25ht[0Kt[0Kp[0Ks[0K:[0K/[0K/[0Kg[0Ki[0Kt[0Kh[0Ku[0Kb[0K.[0Kc[0Kpo[0Km[0K[?25l$ git remote add origin https://github.cpo[0K[?25h[?25l$ git remote add origin https://github.cp[0K[?25h[?25l$ git remote add origin https://github.c[0K[?25hm[0K[?25l$ git remote add origin https://github.c[0K[?25ho[0Km[0K/[0Kc[0Ko[0Km[0K[?25l$ git remote add origin https://github.com/co[0K[?25hn[0Kt[0Ke[0Kx[0Kt[0K-[0Kd[0Ke[0Kp[0Ke[0Kn[0Kd[0Ke[0Kn[0Kt[0K/[0Kr[0Ke[0Ks[0Ke[0K[?25l$ git remote add origin https://github.com/context-dependent/res[0K[?25h[?25l$ git remote add origin https://github.com/context-dependent/re[0K[?25hc[0Ke[0Kn[0Ks[0Ke[0Km[0Ks[0Ke[0Kn[0K[?25l$ git remote add origin https://github.com/context-dependent/recensemse[0K[?25h[?25l$ git remote add origin https://github.com/context-dependent/recensems[0K[72G[?25h[71G[?25l$ git remote add origin https://github.com/context-dependent/recensemse[0K[?25hn[0Kt[0K[?25l$ git remote add origin https://github.com/context-dependent/recensemsen[0K[?25h[?25l$ git remote add origin https://github.com/context-dependent/recensemse[0K[?25h[?25l$ git remote add origin https://github.com/context-dependent/recensems[0K[?25h[?25l$ git remote add origin https://github.com/context-dependent/recensem[0K[?25he[0Kn[0Kt[0K[74G[73G[?25l$ git remote add origin https://github.com/context-dependent/recensement.[0K[?25hg[0Ki[0Kt[0K[?25l
-[0K[?25h[?25l
-[0;32mtmcmanus@V02 [0;35m [0;33m~/Documents/projects/recensement[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ t[0K[?25h[?25l$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git p[0K[?25hu[0Ks[0Kh[0K[?25l
-[0K[?25hfatal: The current branch master has no upstream branch.[0K[?25l
-To push the current branch and set the remote as upstream, use[0K
-[0K
-    git push --set-upstream origin master[0K
-[0K
-[0K[?25h[?25l
-[0;32mtmcmanus@V02 [0;35m [0;33m~/Documents/projects/recensement[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add -[0K[?25hA[0K[?25l
-[0K[?25hHEAD is now at 79848b5 really going to try not to push shapefiles[0K[?25l
-[0K[?25h[?25l
-[0;32mtmcmanus@V02 [0;35m [0;33m~/Documents/projects/recensement[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ git reset --hard HEAD[0K[?25h~[0K1[0K[?25l
-[0K[?25hfatal: ambiguous argument 'HEAD~1': unknown revision or path not in the working tree.[0K[?25l
-Use '--' to separate paths from revisions, like this:[0K
-'git <command> [<revision>...] -- [<file>...]'[0K
-[0K[?25h[?25l
-[0;32mtmcmanus@V02 [0;35m [0;33m~/Documents/projects/recensement[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git s[0K[?25ht[0Ka[0Kt[0Ku[0Ks[0K[?25l
-[0K[?25hOn branch master[0K[?25l
-Changes not staged for commit:[0K
-  (use "git add <file>..." to update what will be committed)[0K
-  (use "git checkout -- <file>..." to discard changes in working directory)[0K
-[0K
-        [0;31mmodified:   .Rproj.user/876F5608/console06/822CC22F[0m[0K
-[0K
-Untracked files:[0K
-  (use "git add <file>..." to include in what will be committed)[0K
-[0K
-        [0;31m.Rproj.user/876F5608/sources/prop/598FFC55[0m[0K
-        [0;31m.Rproj.user/876F5608/sources/prop/BAC17D72[0m[0K
-        [0;31m.Rproj.user/876F5608/sources/s-9DD683A/6B0ADC1C-contents[0m[0K
-        [0;31m.Rproj.user/876F5608/sources/s-9DD683A/BC22DD6[0m[0K
-        [0;31m.Rproj.user/876F5608/sources/s-9DD683A/BC22DD6-contents[0m[0K
-        [0;31m.gitignore[0m[0K
-[0K
-no changes added to commit (use "git add" and/or "git commit -a")[0K
-[0K[?25h[?25l
-[0;32mtmcmanus@V02 [0;35m [0;33m~/Documents/projects/recensement[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[6G[?25l$ gi[0K[?25h[?25l$ g[0K[?25h[?25l$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25hg[0K[?25li[0K[13G[?25h[14G[?25l$ git add .git[0K[?25h[?25l$ git add .gi[0K[?25h[?25l$ git add .g[0K[?25h[?25l$ git add .[0K[?25h[?25l$ git add[0K[11G[?25h[?25l$ git add -[0K[?25hA[0K
