@@ -138,8 +138,10 @@ census_geo_level_prefixes = list(
 )
 
 
-download_boundaries <- function(geos = "CSD", year = 2016) {
+download_boundaries <- function(geos = "CSD", year = 2016, browse = FALSE) {
 
+
+  if(browse) browser()
   # For production
   package_root <- find.package("recensement")
 
@@ -155,7 +157,7 @@ download_boundaries <- function(geos = "CSD", year = 2016) {
 
   shape_file <- list.files(tdir, pattern = "shp", full.names = TRUE)
 
-  shp <- sf::st_read(shape_file)
+  shp <- sf::st_read(shape_file) %>% sf::st_transform(4326)
 
   names(shp) <- tolower(names(shp))
 
